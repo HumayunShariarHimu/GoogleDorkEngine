@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoogleDorkEngine</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        input[type="text"], select {
+            width: 60%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .output {
+            margin-top: 30px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Google Dorks Search Tool</h1>
+    <p>Enter a keyword and select a dork to search:</p>
+    <input type="text" id="dorkKeyword" placeholder="Enter keyword">
+    <br>
+    <select id="dorkList">
+        <option value="">Select a Dork</option>
+        <option value="filetype:pdf confidential">filetype:pdf confidential</option>
+        <option value="filetype:xls account">filetype:xls account</option>
+        <option value="inurl:admin.php login">inurl:admin.php login</option>
+        <option value="intitle:index.of password">intitle:index.of password</option>
+        <option value="filetype:sql user">filetype:sql user</option>
+        <option value="filetype:txt debug">filetype:txt debug</option>
+        <option value="intitle:'index of' backup">intitle:'index of' backup</option>
+        <option value="filetype:csv contacts">filetype:csv contacts</option>
+        <option value="inurl:phpmyadmin">inurl:phpmyadmin</option>
+        <option value="filetype:log error">filetype:log error</option>
+        <option value="site:.edu homework answers">site:.edu homework answers</option>
+        <option value="site:.gov confidential">site:.gov confidential</option>
+        <option value="intitle:'index of' logs">intitle:'index of' logs</option>
+        <option value="inurl:/secured/ admin">inurl:/secured/ admin</option>
+        <option value="intitle:'index of' credit card">intitle:'index of' credit card</option>
+        <option value="filetype:doc resume">filetype:doc resume</option>
+        <option value="filetype:xlsx financial">filetype:xlsx financial</option>
+        <option value="inurl:wp-admin login">inurl:wp-admin login</option>
+        <option value="intitle:'login page'">intitle:'login page'</option>
+        <option value="filetype:sql database">filetype:sql database</option>
+        <option value="filetype:pdf private">filetype:pdf private</option>
+        <option value="intitle:'index of' usernames">intitle:'index of' usernames</option>
+        <option value="filetype:docx confidential">filetype:docx confidential</option>
+        <option value="inurl:/private/ pdf">inurl:/private/ pdf</option>
+        <option value="filetype:xml credentials">filetype:xml credentials</option>
+        <option value="inurl:admin panel">inurl:admin panel</option>
+        <option value="site:github.com password">site:github.com password</option>
+        <option value="filetype:txt config">filetype:txt config</option>
+        <option value="intitle:'error' access denied">intitle:'error' access denied</option>
+        <option value="site:pastebin.com key">site:pastebin.com key</option>
+        <option value="inurl:invoice filetype:xlsx">inurl:invoice filetype:xlsx</option>
+        <option value="inurl:customer filetype:pdf">inurl:customer filetype:pdf</option>
+        <option value="inurl:ftp:// confidential">inurl:ftp:// confidential</option>
+        <option value="inurl:/phpinfo.php">inurl:/phpinfo.php</option>
+        <option value="inurl:/webmail login">inurl:/webmail login</option>
+        <option value="inurl:/userlist filetype:txt">inurl:/userlist filetype:txt</option>
+        <option value="intitle:'index of' db_backup">intitle:'index of' db_backup</option>
+        <option value="inurl:/backup/">inurl:/backup/</option>
+        <option value="intitle:'index of' ftp">intitle:'index of' ftp</option>
+        <option value="inurl:/secure/ filetype:sql">inurl:/secure/ filetype:sql</option>
+        <option value="intitle:'index of' ssh">intitle:'index of' ssh</option>
+        <option value="filetype:xml db credentials">filetype:xml db credentials</option>
+        <option value="filetype:env DB_PASSWORD">filetype:env DB_PASSWORD</option>
+        <option value="filetype:yaml password">filetype:yaml password</option>
+        <option value="filetype:json api_key">filetype:json api_key</option>
+        <option value="site:drive.google.com filetype:pdf">site:drive.google.com filetype:pdf</option>
+        <option value="site:dropbox.com confidential">site:dropbox.com confidential</option>
+        <option value="filetype:log error log">filetype:log error log</option>
+        <option value="filetype:bak password">filetype:bak password</option>
+        <option value="intitle:'Welcome to nginx!'">intitle:'Welcome to nginx!'</option>
+        <option value="inurl:/cgi-bin/">inurl:/cgi-bin/</option>
+        <option value="filetype:php site:.com">filetype:php site:.com</option>
+        <option value="site:*.edu inurl:register">site:*.edu inurl:register</option>
+        <option value="intitle:'index of' master.passwd">intitle:'index of' master.passwd</option>
+        <option value="intitle:'index of' htpasswd">intitle:'index of' htpasswd</option>
+    </select>
+    <br>
+    <input type="submit" value="Search Dork" onclick="searchDork()">
+    <div class="output" id="result"></div>
+    <script>
+        function searchDork() {
+            var keyword = document.getElementById('dorkKeyword').value.trim();
+            var selectedDork = document.getElementById('dorkList').value;
+            if (keyword && selectedDork) {
+                var googleSearchURL = "https://www.google.com/search?q=" + encodeURIComponent(selectedDork + " " + keyword);
+                document.getElementById('result').innerHTML = `
+                    <p>Click the link below to search for your dork:</p>
+                    <a href="${googleSearchURL}" target="_blank" style="font-size: 18px; color: #007bff;">${googleSearchURL}</a>
+                `;
+            } else {
+                document.getElementById('result').innerHTML = "<p>Please enter both a keyword and select a dork.</p>";
+            }
+        }
+    </script>
+</body>
+</html>
